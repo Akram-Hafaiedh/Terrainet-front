@@ -1,4 +1,8 @@
-import { FaCalendar, FaSearch } from "react-icons/fa";
+import {
+    FaCalendar,
+    // FaSearch,
+    // FaUserCircle
+} from "react-icons/fa";
 import { useAuth } from "../hooks/useAuth";
 import { Link, Navigate } from 'react-router-dom';
 import Dropdown from "./Dropdown";
@@ -14,31 +18,64 @@ const Header = () => {
 
     const { user, logout } = useAuth();
     const handleLogout = () => {
+        console.log('logout');
         logout();
         return <Navigate to="/login" />;
     }
+    const handleProfileClick = () => {
+        console.log('go to profile page');
+    }
+    const handleSettingsClick = () => {
+        console.log('go to settings page');
+    }
+
 
     const dropdownOptions = [
-        { label: 'Logout', action: handleLogout },
         // Add other options as needed
         {
-            label: <DarkModeButton onDarkMode={() => setIsDarkMode(!isDarkMode)} />
+            label: 'User',
+            items: [
+                { label: 'Profile', action: handleProfileClick },
+                { label: 'Settings', action: handleSettingsClick },
+            ]
         },
-        { label: 'Profile' },
-        { label: 'My history' },
+        {
+            label: 'Reservations',
+            items: [
+                { label: 'My Reservations' },
+            ]
+        },
+        {
+            label: 'Teams',
+            items: [
+
+                { label: 'Team' },
+                { label: 'Invite users' },
+                { label: 'New team' },
+            ]
+        },
+        {
+            label: 'Account',
+            items: [
+                { label: 'Logout', action: handleLogout }
+            ]
+        },
     ];
     return (
         <header className="shadow-md bg-slate-200 dark:bg-slate-800">
             <div className="flex items-center justify-between max-w-6xl p-3 mx-auto">
                 <Link to="./">
-                    <h1 className="flex flex-wrap text-sm font-bold sm:text-xl">
+                    <h1 className="flex flex-wrap text-sm font-bold sm:text-xl space-x-2">
                         <img className="w-14 mr-4" src={balls} alt="" />
-                        <span className="text-slate-500 dark:text-white/70">Terrai</span>
-                        <span className="text-slate-700 dark:text-white">Net</span>
+                        <div>
+                            <span className="text-slate-500 dark:text-white/70">Terrai</span>
+
+                            <span className="text-slate-700 dark:text-white">Net</span>
+                        </div>
                     </h1>
                 </Link>
 
-                <form className="flex items-center rounded-lg bg-slate-100">
+                {/* <form className="flex items-center rounded-lg bg-slate-100">
                     <label className='relative block'>
                         <span className='absolute inset-y-0 left-0 flex items-center pl-2'>
                             <FaSearch className='w-5 h-5 fill-slate-300' />
@@ -48,15 +85,31 @@ const Header = () => {
                         />
 
                     </label>
-                </form>
+                </form> */}
                 <ul className='flex items-center gap-3'>
                     {/* <DarkModeButton /> */}
                     <Link to="/calendar" className='p-3 bg-transparent rounded-full hover:bg-gray-600/10 dark:hover:bg-white/10'>
-                        <FaCalendar className='dark:text-white' />
+                        <li><FaCalendar className='dark:text-white' /></li>
                     </Link>
+                    <DarkModeButton howLabel={false} onDarkMode={() => setIsDarkMode(!isDarkMode)} />
 
                     <Link to="/about">
                         <li className='hidden hover:underline sm:inline dark:text-gray-100'>About</li>
+                    </Link>
+                    <Link to="/events">
+                        <li className='hidden hover:underline sm:inline dark:text-gray-100'>Events</li>
+                    </Link>
+                    <Link to="/participate">
+                        <li className='hidden hover:underline sm:inline dark:text-gray-100'>Participate</li>
+                    </Link>
+                    <Link to="/ladder">
+                        <li className='hidden hover:underline sm:inline dark:text-gray-100'>Ladder</li>
+                    </Link>
+
+
+
+                    <Link to="/dashboard">
+                        <li className='hidden hover:underline sm:inline dark:text-gray-100'>Dashboard</li>
                     </Link>
                     {
                         user ? (
@@ -98,20 +151,41 @@ const Header = () => {
                                         </ul>
                                     )} */}
                                     {user && (
-                                        <div className="flex flex-col space-y-2 p-2">
-                                            {dropdownOptions.map((option, index) => (
 
-                                                <Dropdown.Link
-                                                    key={index}
-                                                    onClick={option.action}
-                                                    // href={option.action}
-                                                    className={'py-2 px-4 hover:bg-gray-400/40 cursor-pointer hover:underline'}>
-                                                    {option.label}
-                                                </Dropdown.Link>
-                                            ))}
-                                            {/* <Dropdown.Link href="/settings">Settings</Dropdown.Link> */}
-                                            {/* <Dropdown.Link href="/logout">Logout</Dropdown.Link> */}
-                                        </div>
+                                        <>
+                                            <div className="px-4 flex flex-col py-2">
+                                                <div><span className="font-medium">signed in as :</span> {user.username}</div>
+                                                <div className="font-medium">{user.email}</div>
+                                            </div>
+
+
+                                            <div className="flex flex-col divide-y">
+                                                {dropdownOptions.map((group, groupIndex) => (
+                                                    <div key={groupIndex}>
+                                                        {
+                                                            group.label && (
+                                                                <div className="sr-only py-2 px-4 text-gray-700 dark:text-gray-200 font-bold">
+                                                                    {group.label}
+                                                                </div>
+                                                            )
+                                                        }
+                                                        {group.items.map((option, index) => (
+                                                            <div className="flex flex-col"
+                                                                key={index}
+                                                            >
+
+                                                                <Dropdown.Link
+                                                                    onClick={option.action}
+                                                                    className={'py-2 text-sm px-4 hover:bg-gray-200/40 cursor-pointer'}>
+                                                                    {option.label}
+                                                                </Dropdown.Link>
+                                                            </div>
+                                                        ))}
+
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </>
                                     )}
                                 </Dropdown.Content>
                             </Dropdown>

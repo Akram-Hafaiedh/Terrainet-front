@@ -11,18 +11,6 @@ import { Link } from 'react-router-dom';
 
 const imageUrl = 'https://placekitten.com/400/300';
 
-// const items = [
-//     { id: 1, type: 'typeA', title: 'Item 1', image: 'https://placekitten.com/120/160', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-//     { id: 2, type: 'typeC', title: 'Item 2', image: 'https://placekitten.com/120/160', text: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-//     { id: 3, type: 'typeB', title: 'Item 3', image: 'https://placekitten.com/120/160', text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.' },
-//     { id: 4, type: 'typeD', title: 'Item 4', image: 'https://placekitten.com/120/160', text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' },
-//     { id: 5, type: 'typeB', title: 'Item 5', image: 'https://placekitten.com/120/160', text: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-//     { id: 6, type: 'typeA', title: 'Item 6', image: 'https://placekitten.com/120/160', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-//     { id: 7, type: 'typeC', title: 'Item 7', image: 'https://placekitten.com/120/160', text: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-//     { id: 8, type: 'typeB', title: 'Item 8', image: 'https://placekitten.com/120/160', text: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.' },
-//     { id: 9, type: 'typeB', title: 'Item 9', image: 'https://placekitten.com/120/160', text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' },
-//     { id: 10, type: 'typeA', title: 'Item 10', image: 'https://placekitten.com/120/160', text: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' },
-// ];
 
 const Carousel = ({ places }) => {
     // console.log('Carousel Re-rendered');

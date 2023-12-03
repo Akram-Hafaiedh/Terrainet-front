@@ -7,12 +7,20 @@ export default {
   theme: {
     extend: {
       keyframes: {
-        //   blob: {
-        //     '0%': { transform: 'translate(0%, 0%) scale(1)' },
-        //     '33%': { transform: 'translate(30%, -50%) scale(1.2)' },
-        //     '66%': { transform: 'translate(-20%, 20%) scale(0.8)' },
-        //     '100%': { transform: 'translate(0%, 0%) scale(1)' }
-        //   },
+        moveUpRight: {
+          '0%': {
+            opacity: 0,
+            transform: 'translateY(100%) translateX(0)'
+          },
+          '30%': {
+            opacity: 1,
+            transform: 'translateY(-10%) translateX(10%)'
+          },
+          '100%': {
+            opacity: 1,
+            transform: 'translateY(0) translateX(0)'
+          }
+        },
         bounceFromLeft: {
           '0%,100%': {
             transform: 'translateX(0)',
@@ -27,6 +35,7 @@ export default {
       },
       animation: {
         //   'blob': 'blob 7s infinite',
+        'move-up-right': 'moveUpRight 0.5 ease-out',
         'bounce-from-left': 'bounceFromLeft 1s infinite'
       }
     },

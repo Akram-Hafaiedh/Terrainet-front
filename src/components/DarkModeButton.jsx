@@ -3,7 +3,7 @@ import { FaMoon } from "react-icons/fa";
 import useDarkMode from "../hooks/useDarkMode";
 import { BsSunFill } from "react-icons/bs";
 
-function DarkModeButton({ onDarkMode }) {
+function DarkModeButton({ onDarkMode, showLabel }) {
     const [isDarkMode, setIsDarkMode] = useDarkMode();
     const handleToggleDark = () => {
         setIsDarkMode(!isDarkMode)
@@ -20,13 +20,13 @@ function DarkModeButton({ onDarkMode }) {
             onClick={handleToggleDark}
         >   {isDarkMode ? (
             <>
-                <span className="mr-2">Light</span>
+                {showLabel && <span className="text-black mr-2">Light</span>}
                 <BsSunFill className="text-yellow-500 rounded text-center" />
             </>
         ) : (
             <>
-                <span className="mr-2">Dark</span>
-                <FaMoon className="text-black rounded text-center" />
+                { showLabel && <span className="mr-2">Dark</span>}
+                <FaMoon className="text-black dark:text-white rounded text-center" />
             </>
         )}
             {/* {children || (!isDarkMode ? <FaMoon className="text-black" /> : <BsSunFill />)} */}
@@ -38,5 +38,6 @@ function DarkModeButton({ onDarkMode }) {
 DarkModeButton.propTypes = {
     onDarkMode: PropTypes.func,
     // children: PropTypes.node.isRequired,
+    showLabel: PropTypes.bool,
 };
 export default DarkModeButton;

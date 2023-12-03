@@ -77,9 +77,10 @@ const Content = ({ align = 'right', width = '48', contentClasses = 'py-1 bg-whit
         </>
     )
 }
-const DropdownLink = ({ as, route, method, children, className }) => {
+const DropdownLink = ({ as, route, method, children, className, onClick }) => {
     return (
         <RouterLink
+            onClick={onClick}
             to={route}
             as={as}
             method={method}
@@ -100,6 +101,7 @@ const Trigger = ({ children }) => {
 }
 
 DropdownLink.propTypes = {
+    onClick: PropTypes.func,
     method: PropTypes.string,
     route: PropTypes.string,
     as: PropTypes.string,

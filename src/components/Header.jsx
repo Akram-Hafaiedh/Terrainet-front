@@ -4,7 +4,11 @@ import {
     // FaUserCircle
 } from "react-icons/fa";
 import { useAuth } from "../hooks/useAuth";
-import { Link, Navigate } from 'react-router-dom';
+import {
+    Link,
+    // Navigate,
+    useNavigate
+} from 'react-router-dom';
 import Dropdown from "./Dropdown";
 import DarkModeButton from "./DarkModeButton";
 import useDarkMode from "../hooks/useDarkMode";
@@ -15,16 +19,18 @@ import balls from '/balls.svg'
 
 const Header = () => {
     const [isDarkMode, setIsDarkMode] = useDarkMode();
+    const navigate = useNavigate()
 
     const { user, logout } = useAuth();
-    const handleLogout = () => {
-        console.log('logout');
-        logout();
-        return <Navigate to="/login" />;
+    const handleLogout = async () => {
+        console.log('Logout button clicked');
+        await logout();
+        navigate('/login');
     }
-    const handleProfileClick = () => {
-        console.log('go to profile page');
-    }
+    // const handleProfileClick = () => {
+    //     console.log('Profile button clicked');
+    //     navigate('/profile');
+    // }
     const handleSettingsClick = () => {
         console.log('go to settings page');
     }
@@ -35,7 +41,7 @@ const Header = () => {
         {
             label: 'User',
             items: [
-                { label: 'Profile', action: handleProfileClick },
+                { label: 'Profile', to: '/profile' },
                 { label: 'Settings', action: handleSettingsClick },
             ]
         },
@@ -169,18 +175,24 @@ const Header = () => {
                                                                 </div>
                                                             )
                                                         }
-                                                        {group.items.map((option, index) => (
-                                                            <div className="flex flex-col"
-                                                                key={index}
-                                                            >
+                                                        {group.items.map((option, index) => {
+                                                            console.log(option);
+                                                            return (
+                                                                <div className="flex flex-col"
+                                                                    key={index}
+                                                                >
 
-                                                                <Dropdown.Link
-                                                                    onClick={option.action}
-                                                                    className={'py-2 text-sm px-4 hover:bg-gray-200/40 cursor-pointer'}>
-                                                                    {option.label}
-                                                                </Dropdown.Link>
-                                                            </div>
-                                                        ))}
+                                                                    <Dropdown.Link
+
+                                                                        onClick={option.action}
+                                                                        route={option.to}
+                                                                        // onClick={() => console.log('action')}
+                                                                        className={'py-2 text-sm px-4 hover:bg-gray-200/40 cursor-pointer'}>
+                                                                        {option.label}
+                                                                    </Dropdown.Link>
+                                                                </div>
+                                                            )
+                                                        })}
 
                                                     </div>
                                                 ))}

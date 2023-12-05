@@ -13,28 +13,43 @@ import Dropdown from "./Dropdown";
 import DarkModeButton from "./DarkModeButton";
 import useDarkMode from "../hooks/useDarkMode";
 
-import balls from '/balls.svg'
+import logoicon from '/balls.svg'
+import logoTextLight from '/terrainet-light.svg'
+import logoTextDark from '/terrainet-light.svg'
+import { useEffect, useState } from "react";
 
 
 
 const Header = () => {
     const [isDarkMode, setIsDarkMode] = useDarkMode();
     const navigate = useNavigate()
+    const [userProfile, setUserProfile] = useState(null);
+    const { user, logout, getUserProfile } = useAuth();
 
-    const { user, logout } = useAuth();
+    useEffect(() => {
+        const fetchProfile = async () => {
+            if (user) {
+                try {
+                    const userProfile = await getUserProfile(user.id);
+                    setUserProfile(userProfile);
+                    // console.log("🚀 ~ file: Header.jsx:33 ~ fetchProfile ~ userProfile:", userProfile)
+                } catch (error) {
+                    console.error("Error fetching user profile", error);
+                }
+            }
+        }
+        fetchProfile();
+    }, [user, getUserProfile]);
+
     const handleLogout = async () => {
         console.log('Logout button clicked');
         await logout();
         navigate('/login');
     }
-    // const handleProfileClick = () => {
-    //     console.log('Profile button clicked');
-    //     navigate('/profile');
-    // }
+
     const handleSettingsClick = () => {
         console.log('go to settings page');
     }
-
 
     const dropdownOptions = [
         // Add other options as needed
@@ -68,16 +83,29 @@ const Header = () => {
         },
     ];
     return (
-        <header className="shadow-md bg-slate-200 dark:bg-slate-800">
+        <header className="shadow-md bg-slate-200 dark:bg-gray-800">
             <div className="flex items-center justify-between max-w-6xl p-3 mx-auto">
                 <Link to="./">
+                    
                     <h1 className="flex flex-wrap text-sm font-bold sm:text-xl space-x-2">
-                        <img className="w-14 mr-4" src={balls} alt="" />
-                        <div>
-                            <span className="text-slate-500 dark:text-white/70">Terrai</span>
-
-                            <span className="text-slate-700 dark:text-white">Net</span>
-                        </div>
+                        <img className="w-14 mr-4" src={logoicon} alt="" />
+                        {
+                            isDarkMode
+                                ? logoTextDark
+                                    ? <img className="w-14 mr-4" src={logoTextDark} alt="" />
+                                    : (<div className="hidden md:block">
+                                        <span className="text-slate-500 dark:text-white/70">Terrai</span>
+                                        <span className="text-slate-700 dark:text-white">Net</span>
+                                    </div>)
+                                : logoTextLight
+                                    ? <img className="w-14 mr-4" src={logoTextLight} alt="" />
+                                    : (
+                                        <div className="hidden md:block">
+                                            <span className="text-slate-500 dark:text-white/70">Terrai</span>
+                                            <span className="text-slate-700 dark:text-white">Net</span>
+                                        </div>
+                                    )
+                        }
                     </h1>
                 </Link>
 
@@ -123,11 +151,11 @@ const Header = () => {
                             <Dropdown>
                                 <Dropdown.Trigger>
                                     {user ? (
-                                        user.avatar ? (
+                                        userProfile ? (
                                             <img
-                                                src={user.avatar}
+                                                src={`/api/uploads/${userProfile.profilePictureUrl}`}
                                                 alt="User Avatar"
-                                                className={`w-8 h-8 rounded-full cursor-pointer`}
+                                                className={`w-8 h-8 rounded-full cursor-pointer dark:shadow-white shadow-md`}
                                             />
                                         ) : (
                                             <div className={`w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center`}>
@@ -176,14 +204,12 @@ const Header = () => {
                                                             )
                                                         }
                                                         {group.items.map((option, index) => {
-                                                            console.log(option);
+                                                            // console.log(option);
                                                             return (
                                                                 <div className="flex flex-col"
                                                                     key={index}
                                                                 >
-
                                                                     <Dropdown.Link
-
                                                                         onClick={option.action}
                                                                         route={option.to}
                                                                         // onClick={() => console.log('action')}

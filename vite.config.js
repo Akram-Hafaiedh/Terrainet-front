@@ -9,7 +9,7 @@ export default defineConfig({
         target: "http://localhost:4000",
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, '')
-      }
+      },
     }
   },
   plugins: [react()],

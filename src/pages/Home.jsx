@@ -29,7 +29,7 @@ const Home = () => {
                     method: "GET",
                     headers: {
                         'Authorization': `Bearer ${authToken}`,
-                        'Content-Type': 'application/Json'
+                        'Content-Type': 'application/json'
                     }
                 })
                 if (!res.ok) {
@@ -50,7 +50,7 @@ const Home = () => {
         fetchData();
     }, [])
     return (<>
-        <div className="border-4 rounded-lg border-indigo-600">
+        <div className="border-4 rounded-md max-w-6xl border-indigo-600 mx-auto my-2">
             {/* <Map /> */}
             <SecondMap places={places} />
         </div>

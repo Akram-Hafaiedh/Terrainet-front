@@ -2,14 +2,20 @@
 
 import { useState } from "react";
 import { FaFacebookF, FaGithubAlt, FaGoogle } from "react-icons/fa";
-import myLogo from '/terrainet-v2.svg'
-import PropTypes from 'prop-types';
 // import bg from '/courbe2.svg'
 import { Link, useNavigate } from "react-router-dom";
+import useDarkMode from "../hooks/useDarkMode";
+import myLogo from '/terrainet-v2-light.svg'
+import myLogoDark from '/terrainet-v2-dark.svg'
 
 import CustomToast from "../components/customToast";
+import FormField from "../components/FormField";
 
 const Register = () => {
+    const [
+        isDarkMode,
+        //  setIsDarkMode
+    ] = useDarkMode();
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -62,10 +68,6 @@ const Register = () => {
         return Object.keys(errors).length === 0
     }
 
-    // const handleTryAgain = () => {
-    //     showToast('Retrying ...', false, handleRegister);
-    // }
-    // const [count, setCount] = useState(0)
     const handleRegister = async (e) => {
         e.preventDefault();
 
@@ -114,12 +116,19 @@ const Register = () => {
                 <div className="blur-2xl animate-bounce absolute -bottom-20 left-1/2 w-96 h-96 rounded-full bg-[#EC4C60] transform mix-blend-multiply filter  opacity-70"></div>
 
                 {/* <img className="hidden sm:block scale h-screen absolute inset-x-auto w-auto z-0" src={bg} alt="background" /> */}
-                <div className="relative z-10 bg-white p-8 shadow-md rounded-md w-96">
+                <div className="relative z-10 dark:text-gray-100 bg-white dark:bg-gray-900 p-8 shadow-md rounded-md w-96">
                     <div className='text-sm'>
-                        <Link to="/"><img className="mx-auto w-auto h-32 mb-6" src={myLogo} alt="Terrainet Logo" /></Link>
+                        <Link to="/">
+                            {isDarkMode ? (
+
+                                <img className="mx-auto w-auto h-32 mb-6" src={myLogoDark} alt="Terrainet Logo" />
+                            ) : (
+                                <img className="mx-auto w-auto h-32 mb-6" src={myLogo} alt="Terrainet Logo" />
+
+                            )}
+                        </Link>
                         <h2 className="font-semibold text-xl mb-2">Create a new account</h2>
                         <p>You already have an account ? <Link to="/login" className="text-blue-500 hover:underline pointer" href="">Login</Link> to your account.</p>
-                        <p></p>
                     </div>
                     <form className='space-y-6 mt-4'>
                         <FormField
@@ -216,46 +225,6 @@ const Register = () => {
 };
 
 
-
-
-const FormField = ({ onChange, error, value, type, id, label }) => {
-    return (
-        <div>
-            <div className="relative">
-                <input
-                    onChange={onChange}
-                    type={type}
-                    name={id}
-                    id={id}
-                    autoComplete={id}
-                    required
-                    className={`border 
-                        ${error ?
-                            'border-red-500 dark:border-red-600' : 'dark:border-gray-600 border-gray-300'
-                        } block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white  dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`}
-                    placeholder=" "
-                    value={value}
-                />
-                <label htmlFor={id} className={`absolute text-sm 
-                
-                    ${error ? 'text-red-500 dark:text-red-400' : 'text-gray-500 dark:text-gray-400'}
-                 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1`}
-                >{label} {error && "*"}</label>
-            </div>
-            {error && (
-                <p className="text-sm text-red-500 mt-1">{error}</p>
-            )}
-        </div>
-    )
-}
-FormField.propTypes = {
-    onChange: PropTypes.func.isRequired,
-    value: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    error: PropTypes.string,
-}
 
 Register.propTypes = {
 

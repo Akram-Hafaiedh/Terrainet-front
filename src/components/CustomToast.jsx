@@ -28,7 +28,7 @@ function CustomToast({ message, onClose, onTryAgain, success }) {
 
     return (
         <div className={` ${visible ? 'animate-move-up-right' : 'opacity-0'}
-        bg-white z-20 right-4 p-4 border boder-gray-300 w-full  rounded-md shadow-md relative
+        bg-white z-20 right-4 p-4 border border-gray-300 w-full  rounded-md shadow-md relative
         `}
         >
             <div className="flex items-center justify-between space-x-5">

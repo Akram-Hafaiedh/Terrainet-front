@@ -22,6 +22,7 @@ const SecondMap = ({ places }) => {
                 <Map
                     center={center}
                     zoom={13}
+                // id={import.meta.ev.VITE.GOOGLE_MAPS_MAP_ID}
                 // gestureHandling={'greedy'}
                 // disableDefaultUI={true}
                 >

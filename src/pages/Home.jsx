@@ -12,6 +12,7 @@ const Home = () => {
     const [places, setPlaces] = useState([])
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    
 
     // Retrieve the authentication token from local storage
 

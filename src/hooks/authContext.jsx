@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
     const getUserProfile = async (userId) => {
         try {
             // Fetch user profile data from your backend
-            const response = await fetch(`/api/users/${userId}/profile`,);
+            const response = await fetch(`/api/users/${userId}/profile`);
             const userProfile = await response.json();
             console.log('User Profile:', userProfile);
             return userProfile;
@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
     const updateProfilePhotos = async (userId, token, formData, photoType) => {
         console.log("🚀 ~ file: authContext.jsx:35 ~ updateProfilePhotos ~ photoType:", photoType)
         console.log("🚀 ~ file: authContext.jsx:35 ~ updateProfilePhotos ~ formData:", formData)
-        // console.log("🚀 ~ file: authContext.jsx:35 ~ updateProfilePhotos ~ token:", token)
+        console.log("🚀 ~ file: authContext.jsx:35 ~ updateProfilePhotos ~ token:", token)
         console.log("🚀 ~ file: authContext.jsx:35 ~ updateProfilePhotos ~ userId:", userId)
 
 

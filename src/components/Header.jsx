@@ -13,9 +13,10 @@ import Dropdown from "./Dropdown";
 import DarkModeButton from "./DarkModeButton";
 import useDarkMode from "../hooks/useDarkMode";
 
-import logoicon from '/balls.svg'
+import logoiconLight from '/balls-light.svg'
+import logoiconDark from '/balls-dark.svg'
 import logoTextLight from '/terrainet-light.svg'
-import logoTextDark from '/terrainet-light.svg'
+import logoTextDark from '/terrainet-dark.svg'
 import { useEffect, useState } from "react";
 
 
@@ -85,41 +86,29 @@ const Header = () => {
     return (
         <header className="shadow-md bg-slate-200 dark:bg-gray-800">
             <div className="flex items-center justify-between max-w-6xl p-3 mx-auto">
-                <Link to="./">
-                    
+                <Link to="./" className="h-">
+
                     <h1 className="flex flex-wrap text-sm font-bold sm:text-xl space-x-2">
-                        <img className="w-14 mr-4" src={logoicon} alt="" />
-                        {
-                            isDarkMode
-                                ? logoTextDark
-                                    ? <img className="w-14 mr-4" src={logoTextDark} alt="" />
-                                    : (<div className="hidden md:block">
-                                        <span className="text-slate-500 dark:text-white/70">Terrai</span>
-                                        <span className="text-slate-700 dark:text-white">Net</span>
-                                    </div>)
-                                : logoTextLight
-                                    ? <img className="w-14 mr-4" src={logoTextLight} alt="" />
-                                    : (
-                                        <div className="hidden md:block">
+                        {isDarkMode ?
+                            (
+                                <>
+                                    <img className="w-14 h-auto mr-4" src={logoiconDark} alt="" />
+                                    <img className="w-14 h-auto text-lg mr-4" src={logoTextDark} alt="" />
+                                </>
+                            ) : (
+                                <>
+                                    <img className="w-14 mr-4" src={logoiconLight} alt="" />
+                                    <img className="w-14 mr-4 text-lg" src={logoTextLight} alt="" />
+                                </>
+                            )}
+                        {/* <div className="hidden md:block">
                                             <span className="text-slate-500 dark:text-white/70">Terrai</span>
                                             <span className="text-slate-700 dark:text-white">Net</span>
-                                        </div>
-                                    )
-                        }
+                                        </div> */}
                     </h1>
                 </Link>
 
-                {/* <form className="flex items-center rounded-lg bg-slate-100">
-                    <label className='relative block'>
-                        <span className='absolute inset-y-0 left-0 flex items-center pl-2'>
-                            <FaSearch className='w-5 h-5 fill-slate-300' />
-                        </span>
-                        <input type="text" placeholder="Search..." name="" id=""
-                            className="w-24 py-2 pr-3 bg-white rounded-md pl-9 placeholder:text-slate-400 placeholder:italic focus:outline-none sm:w-64"
-                        />
 
-                    </label>
-                </form> */}
                 <ul className='flex items-center gap-3'>
                     {/* <DarkModeButton /> */}
                     <Link to="/calendar" className='p-3 bg-transparent rounded-full hover:bg-gray-600/10 dark:hover:bg-white/10'>

@@ -109,7 +109,6 @@ const Profile = () => {
                             type="file" />
                         <FaRegEdit className=" text-gray-100" />
                     </label>
-
                 </div>
             </section>
             <section className="relative py-16 bg-blue-50 dark:bg-gray-700">
@@ -134,16 +133,34 @@ const Profile = () => {
                                 </div>
                                 <div className="relative">
                                     {profile.profilePictureUrl ? (
-                                        <div className="relative">
-                                            <>
-                                                <img
-                                                    src={`/api/uploads/${profile.profilePictureUrl}`}
-                                                    alt="User Avatar"
-                                                    className="rounded-full z-10 w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 mx-auto -mt-24"
-                                                />
-                                            </>
+                                        // <div className="relative">
+                                        <>
+                                            <img
+                                                src={`/api/uploads/${profile.profilePictureUrl}`}
+                                                alt="User Avatar"
+                                                className="absolute inset-0 rounded-full z-10 w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 mx-auto -mt-24"
+                                            />
+                                            <div className="absolute bottom-0 w-6 h-6 md:h-8 md:w-8 lg:w-10 lg:h-10 flex bg-black/50 rounded-full items-center justify-center">
+                                                <label
+                                                    htmlFor="profilePictureUrl"
+                                                    // onClick={(e) => handleLabelClick(e, 'profilePicture')}
+                                                    className="flex px-3 py-2 space-x-2 items-center text-xs text-gray-100 cursor-pointer "
+                                                >
+                                                    <FaRegEdit className="text-white text-xs" />
+                                                    <input
+                                                        // ref={coverPhotoInputRef}
 
-                                        </div>
+                                                        id="profilePictureUrl"
+                                                        name="profilePictureUrl"
+                                                        className="hidden w-full h-full"
+                                                        accept="image/*"
+                                                        onChange={handlePhotoChange}
+                                                        type="file" />
+                                                </label>
+                                            </div>
+                                        </>
+
+                                        // </div>
                                     ) : (
                                         <div className="z-10 w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 bg-blue-500 mx-auto shadow-2xl rounded-full inset-x-0 top-0 absolute flex items-center justify-center -mt-24">
                                             <span className="text-white text-5xl md:text-6xl lg:text-8xl font-semibold">

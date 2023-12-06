@@ -15,11 +15,11 @@ function App() {
   const location = useLocation();
   const shouldShowHeader = !(location.pathname === "/login" || location.pathname === "/register");
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!isLoggedIn && location.pathname !== "/login" && location.pathname !== "/register") {
       navigate('/login');
       // Return null or some loading indicator while navigating
     }
-  }, [isLoggedIn, navigate])
+  }, [isLoggedIn, navigate, location.pathname])
 
 
   return (
@@ -29,8 +29,8 @@ function App() {
 
       {/* Routes that should not have the Header */}
       <Routes>
-        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
         {/* Routes for logged-in users */}
         {isLoggedIn && (
           <>

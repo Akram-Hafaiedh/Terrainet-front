@@ -121,7 +121,7 @@ Trigger.propTypes = {
 }
 
 Dropdown.propTypes = {
-    options: PropTypes.array.isRequired,
+    options: PropTypes.array,
     user: PropTypes.object,
     children: PropTypes.node.isRequired
 };

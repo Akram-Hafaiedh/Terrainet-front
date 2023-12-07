@@ -4,6 +4,7 @@
 import SecondMap from "../components/SecondMap";
 import Carousel from "../components/Carousel";
 import { useEffect, useState } from "react";
+import NotificationCard from "../components/NotificationCard";
 // import { Link } from "react-router-dom";
 // import { GoAlert, GoAlertFill, GoCheckCircle, GoInfo, GoX, GoXCircle } from "react-icons/go";
 
@@ -12,7 +13,7 @@ const Home = () => {
     const [places, setPlaces] = useState([])
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
+
 
     // Retrieve the authentication token from local storage
 
@@ -90,6 +91,8 @@ const Home = () => {
             </div>
         </form>
         <Carousel places={places} />
+
+        <NotificationCard />
 
 
         <div className="w-full p-4 text-center bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">

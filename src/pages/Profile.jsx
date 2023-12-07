@@ -131,34 +131,32 @@ const Profile = () => {
                                         <p className="text-gray-400 dark:text-white text-sm">Events</p>
                                     </div>
                                 </div>
-                                <div className="relative">
+                                <div className="relative flex justify-center items-center">
                                     {profile.profilePictureUrl ? (
                                         // <div className="relative">
-                                        <>
+                                        <div className="relative inline-block">
                                             <img
                                                 src={`/api/uploads/${profile.profilePictureUrl}`}
                                                 alt="User Avatar"
-                                                className="absolute inset-0 rounded-full z-10 w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 mx-auto -mt-24"
+                                                className="relative inset-0 rounded-full z-10 w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 mx-auto -mt-24"
                                             />
-                                            <div className="absolute bottom-0 w-6 h-6 md:h-8 md:w-8 lg:w-10 lg:h-10 flex bg-black/50 rounded-full items-center justify-center">
+                                            <div className="absolute bottom-0 right-0 z-20">
                                                 <label
                                                     htmlFor="profilePictureUrl"
-                                                    // onClick={(e) => handleLabelClick(e, 'profilePicture')}
-                                                    className="flex px-3 py-2 space-x-2 items-center text-xs text-gray-100 cursor-pointer "
+                                                    className="flex px-3 py-2 space-x-2 items-center text-xs text-gray-100 cursor-pointer rounded-full bg-white/50 w-6 h-6 md:h-8 md:w-8 lg:w-10 lg:h-10 "
                                                 >
-                                                    <FaRegEdit className="text-white text-xs" />
+                                                    <FaRegEdit className="text-white text-sm" />
                                                     <input
-                                                        // ref={coverPhotoInputRef}
-
                                                         id="profilePictureUrl"
                                                         name="profilePictureUrl"
                                                         className="hidden w-full h-full"
                                                         accept="image/*"
                                                         onChange={handlePhotoChange}
-                                                        type="file" />
+                                                        type="file"
+                                                    />
                                                 </label>
                                             </div>
-                                        </>
+                                        </div>
 
                                         // </div>
                                     ) : (

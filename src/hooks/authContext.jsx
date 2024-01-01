@@ -1,11 +1,24 @@
 import PropTypes from 'prop-types';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // Check local storage for saved user data on initial load
+        const storedToken = (localStorage.getItem('token'));
+        console.log('Stored Token:', storedToken);
+
+        if (storedToken) {
+            setIsLoggedIn(true);
+        }
+
+        setIsLoading(false);
+    }, []);
 
     const login = (userData) => {
         setUser(userData)
@@ -86,7 +99,7 @@ const AuthProvider = ({ children }) => {
     }
     return (
         <AuthContext.Provider value={contextValue}>
-            {children}
+            {isLoading ? <div>Loading...</div> : children}
         </AuthContext.Provider>
     );
 };

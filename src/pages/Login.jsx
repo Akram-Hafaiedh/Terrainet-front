@@ -26,7 +26,7 @@ const Login = () => {
         email: "",
         password: "",
     });
-    
+
     let navigate = useNavigate();
 
     const [toast, setToast] = useState(null);

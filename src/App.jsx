@@ -13,15 +13,20 @@ function App() {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate()
   const location = useLocation();
-  const shouldShowHeader = !(location.pathname === "/login" || location.pathname === "/register");
+
   useEffect(() => {
+    console.log('isLoggedIn:', isLoggedIn);
+    console.log('location.pathname:', location.pathname);
+
     if (!isLoggedIn && location.pathname !== "/login" && location.pathname !== "/register") {
+      console.log('Redirecting to login');
       navigate('/login');
       // Return null or some loading indicator while navigating
     }
   }, [isLoggedIn, navigate, location.pathname])
 
 
+  const shouldShowHeader = !(location.pathname === "/login" || location.pathname === "/register");
   return (
     <>
       {shouldShowHeader && <Header />}

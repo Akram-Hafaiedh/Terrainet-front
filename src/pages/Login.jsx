@@ -26,6 +26,7 @@ const Login = () => {
         email: "",
         password: "",
     });
+    
     let navigate = useNavigate();
 
     const [toast, setToast] = useState(null);
@@ -80,27 +81,22 @@ const Login = () => {
         }
 
         try {
-            const res = await fetch('/api/auth/login', {
+            const response = await fetch('/api/auth/login', {
                 method: "POST", //*GET, POST, PUT, DELETE, etc
                 headers: {
-                    "Content-Type": "application/Json",
-                    //* "Content-Type":"application/x-www-form-urlencoded"
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(formData),  //*parses JSON response into native JS object
             })
-            if (res.ok) {
-                const data = await res.json();
-                const userData = data.user;
-                localStorage.setItem('token', data.token);
-                login(userData);
-                // setToast('Welcome' + userData.username);
+            if (response.ok) {
+                const { user, token } = await response.json();
+                localStorage.setItem('token', token);
+                login(user);
                 setToast(null);
                 navigate('/');
             }
             else {
-                // Handle non-successful response
-                const errorData = await res.json();
-                console.log('Login Failed:', errorData.message);
+                const errorData = await response.json();
                 const errorMessage = errorData.message || 'Login failed.';
                 showToast(errorMessage);
                 return;
@@ -120,7 +116,7 @@ const Login = () => {
     }
 
     return (
-        <div className='min-h-screen flex items-center justify-center bg-gray-100 overflow-hidden'>
+        <div className='flex items-center justify-center min-h-screen overflow-hidden bg-gray-100'>
             <div className="absolute bottom-4 right-4">
                 {toast}
             </div>
@@ -128,24 +124,24 @@ const Login = () => {
                 <div className="blur-3xl animation-delay-500 animate-bounce-from-left absolute -left-40 -top-5 w-64 h-64 rounded-full bg-[#202A5D] transform mix-blend-multiply filter opacity-70"></div>
                 <div className="blur-2xl animate-bounce absolute -bottom-20 left-1/2 w-96 h-96 rounded-full bg-[#EC4C60] transform mix-blend-multiply filter  opacity-70"></div>
 
-                {/* <img className="hidden sm:block scale h-screen absolute inset-x-auto w-auto z-0" src={bg} alt="background" /> */}
+                {/* <img className="absolute inset-x-auto z-0 hidden w-auto h-screen sm:block scale" src={bg} alt="background" /> */}
 
-                <div className="relative z-10 bg-white dark:text-gray-100 dark:bg-gray-900 p-8 shadow-2xl m-6 rounded-md w-96">
+                <div className="relative z-10 p-8 m-6 bg-white rounded-md shadow-2xl dark:text-gray-100 dark:bg-gray-900 w-96">
                     <div className='text-sm'>
                         <Link to="/">
                             {isDarkMode ? (
 
-                                <img className="mx-auto w-auto h-32 mb-6" src={myLogoDark} alt="Terrainet Logo" />
+                                <img className="w-auto h-32 mx-auto mb-6" src={myLogoDark} alt="Terrainet Logo" />
                             ) : (
-                                <img className="mx-auto w-auto h-32 mb-6" src={myLogo} alt="Terrainet Logo" />
+                                <img className="w-auto h-32 mx-auto mb-6" src={myLogo} alt="Terrainet Logo" />
 
                             )}
                         </Link>
-                        <h2 className="dark:text-white font-semibold text-xl mb-2">Log in to your account</h2>
+                        <h2 className="mb-2 text-xl font-semibold dark:text-white">Log in to your account</h2>
                         <p>D&apos;ont have an account ? <Link to="/register" className="text-blue-500 hover:underline pointer" href="">Register</Link> for free.</p>
                         <p></p>
                     </div>
-                    <form className='space-y-6 mt-4'>
+                    <form className='mt-4 space-y-6'>
                         <FormField
                             id="email"
                             label="Email"
@@ -165,7 +161,7 @@ const Login = () => {
                         <div>
                             <button
                                 type="submit"
-                                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+                                className="flex justify-center w-full px-3 py-3 text-sm font-semibold leading-6 text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
                                 onClick={handleLogin}
                             >
                                 Log in
@@ -175,21 +171,21 @@ const Login = () => {
                         <div className='flex justify-center space-x-2'>
 
                             <button
-                                className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
+                                className="px-4 py-2 text-white bg-red-500 rounded-md hover:bg-red-600"
                                 type="button"
                                 onClick={() => handleProviderLogin('Google')}
                             >
                                 <FaGoogle />
                             </button>
                             <button
-                                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                                className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
                                 type="button"
                                 onClick={() => handleProviderLogin('Facebook')}
                             >
                                 <FaFacebookF />
                             </button>
                             {/* <button
-                                className="bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-900"
+                                className="px-4 py-2 text-white bg-gray-800 rounded-md hover:bg-gray-900"
                                 type="button"
                                 onClick={() => handleProviderLogin('GitHub')}
                             >
@@ -198,7 +194,7 @@ const Login = () => {
                         </div>
                     </form>
                     {/* Display validation message if present */}
-                    {/* {validationMsg && <div className="text-center mt-2 text-red-800">{validationMsg}</div>} */}
+                    {/* {validationMsg && <div className="mt-2 text-center text-red-800">{validationMsg}</div>} */}
 
                 </div>
             </div>

@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
     const login = (userData) => {
         setUser(userData)
         setIsLoggedIn(true);
+        // localStorage.setItem('token', userData.token);
     };
     const logout = () => {
         setUser(null);
@@ -18,6 +19,7 @@ const AuthProvider = ({ children }) => {
         // Clear the token from local storage
         localStorage.removeItem('token');
     };
+
 
     const getUserProfile = async (userId) => {
         try {

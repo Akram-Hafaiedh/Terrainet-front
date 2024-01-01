@@ -91,15 +91,15 @@ const Carousel = ({ places }) => {
 
                 >
                     {searchedItems.length === 0 ? (
-                        <div className="w-full flex items-center justify-center h-full rounded-md">
-                            <p className="text-gray-500 text-center">No items match the search criteria.</p>
+                        <div className="flex items-center justify-center w-full h-full rounded-md">
+                            <p className="text-center text-gray-500">No items match the search criteria.</p>
                         </div>
                     ) : (
 
                         searchedItems.map((item, index) => {
                             // console.log('Rendered Item:', item);
                             return (
-                                <div to={`item/${index}`} key={index} className="flex-shrink-0 w-72 rounded-md overflow-hidden flex items-center justify-center bg-gray-200 mr-4">
+                                <div to={`item/${index}`} key={index} className="flex items-center justify-center flex-shrink-0 mr-4 overflow-hidden bg-gray-200 rounded-md w-72">
                                     <CarouselItem item={item} onClick={() => handleItemClick(item.id)} />
                                     {/* {item.photos[0]} */}
 
@@ -128,24 +128,24 @@ const CarouselItem = ({ item, onItemClick, onSelect }) => {
                 onClick={handleSelect}
                 className={`relative flex flex-col max-w-sm bg-white  rounded-lg h-full shadow dark:bg-gray-800 dark:border-gray-700 group border-2 ${isSelected ? 'border-blue-500' : 'border-gray-200'}`}
             >
-                <div className='absolute right-4 top-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                <div className='absolute transition-opacity duration-300 opacity-0 right-4 top-4 group-hover:opacity-100'>
                     <Dropdown>
                         <Dropdown.Trigger>
-                            <HiOutlineDotsVertical className="cursor-pointer text-white text-2xl" />
+                            <HiOutlineDotsVertical className="text-2xl text-white cursor-pointer" />
                         </Dropdown.Trigger>
                         <Dropdown.Content>
-                            <div className='pl-4 p-2 flex flex-col'>
-                                <Dropdown.Link className="hover:bg-gray-400 py-1 px-2" onClick={onItemClick} to={`/details/${item.id}`}>Comments</Dropdown.Link>
-                                <Dropdown.Link className="hover:bg-gray-400 py-1 px-2" onClick={onItemClick} to={`/details/${item.id}`}>Details</Dropdown.Link>
-                                <Dropdown.Link className="hover:bg-gray-400 py-1 px-2" onClick={onItemClick} to={`/details/${item.id}`}>Ratings</Dropdown.Link>
+                            <div className='flex flex-col p-2 pl-4'>
+                                <Dropdown.Link className="px-2 py-1 hover:bg-gray-400" onClick={onItemClick} to={`/details/${item.id}`}>Comments</Dropdown.Link>
+                                <Dropdown.Link className="px-2 py-1 hover:bg-gray-400" onClick={onItemClick} to={`/details/${item.id}`}>Details</Dropdown.Link>
+                                <Dropdown.Link className="px-2 py-1 hover:bg-gray-400" onClick={onItemClick} to={`/details/${item.id}`}>Ratings</Dropdown.Link>
                             </div>
                         </Dropdown.Content>
                     </Dropdown>
                 </div>
                 <a href="#">
-                    <img className="rounded-t-lg w-full object-fit h-48" src={imageUrl} alt="" />
+                    <img className="w-full h-48 rounded-t-lg object-fit" src={imageUrl} alt="" />
                 </a>
-                <div className="p-5 flex flex-col h-full">
+                <div className="flex flex-col h-full p-5">
 
                     <a href="#">
                         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{item.name}</h5>
@@ -164,10 +164,10 @@ const CarouselItem = ({ item, onItemClick, onSelect }) => {
                         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-ellipsis line-clamp-2">{item.description}.</p>
                     ) : (
 
-                        <p className="shrink mb-3 font-normal text-gray-700 dark:text-gray-400 max-h-20 text-ellipsis line-clamp-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum exercitationem ab dolores asperiores, commodi molestias blanditiis natus impedit aliquam tempora saepe nam repellat ad quam accusantium quo magni deleniti in corrupti! Consequuntur explicabo illo numquam accusantium quod tempora deleniti laudantium.</p>
+                        <p className="mb-3 font-normal text-gray-700 shrink dark:text-gray-400 max-h-20 text-ellipsis line-clamp-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum exercitationem ab dolores asperiores, commodi molestias blanditiis natus impedit aliquam tempora saepe nam repellat ad quam accusantium quo magni deleniti in corrupti! Consequuntur explicabo illo numquam accusantium quod tempora deleniti laudantium.</p>
                     )}
                     <div className="mt-auto">
-                        <Link to="#" className="w-fit space-x-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <Link to="#" className="inline-flex items-center px-3 py-2 space-x-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg w-fit hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             <span>Make Reservation</span>
                             <FaArrowRight />
                         </Link>

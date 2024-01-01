@@ -37,7 +37,7 @@ const Switch = forwardRef(({ checked: propChecked, onChange, className, ...props
                 }}
                 {...props}
             />
-            <div className="relative w-10 h-5 transition-colors rounded-full border-2 border-transparent shadow-sm bg-gray-400">
+            <div className="relative h-6 transition-colors bg-gray-400 border-2 border-transparent rounded-full shadow-sm w-11">
                 <div
                     className={`absolute top-0 left-0 w-5 h-5 rounded-full bg-white border transition-transform ${checked ? 'translate-x-full' : 'translate-x-0'
                         }`}

@@ -4,6 +4,7 @@ import Map from "../components/Map";
 // import SecondMap from "../components/SecondMap";
 import Carousel from "../components/Carousel";
 import { useEffect, useState } from "react";
+import CloudLogoCarousel from "../components/CloudLogoCarousel";
 // import NotificationCard from "../components/NotificationCard";
 // import CTA from "../components/CTA";
 // import { Link } from "react-router-dom";
@@ -96,6 +97,8 @@ const Home = () => {
         {/* <NotificationCard /> */}
 
 
+        <CloudLogoCarousel />
+
         {/* <CTA /> */}
 
         {/* <div className="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px]">
@@ -109,7 +112,6 @@ const Home = () => {
             </div>
         </div> */}
 
-        <h1>Home!</h1>
 
     </>
     );

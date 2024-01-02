@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         // Check local storage for saved user data on initial load
         const storedToken = (localStorage.getItem('token'));
-        console.log('Stored Token:', storedToken);
+        // console.log('Stored Token:', storedToken);
 
         if (storedToken) {
             setIsLoggedIn(true);

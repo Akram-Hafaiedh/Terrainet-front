@@ -6,6 +6,10 @@ import Home from "./pages/Home"
 import { useAuth } from "./hooks/useAuth"
 import Profile from "./pages/Profile"
 import { useEffect } from "react"
+import About from "./pages/About"
+import Ladder from "./pages/Ladder"
+import Events from "./pages/Events"
+
 
 
 
@@ -15,8 +19,8 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    console.log('isLoggedIn:', isLoggedIn);
-    console.log('location.pathname:', location.pathname);
+    // console.log('isLoggedIn:', isLoggedIn);
+    // console.log('location.pathname:', location.pathname);
 
     if (!isLoggedIn && location.pathname !== "/login" && location.pathname !== "/register") {
       console.log('Redirecting to login');
@@ -41,6 +45,9 @@ function App() {
           <>
             {/* {shouldShowHeader && <Header />} */}
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/ladder" element={<Ladder />} />
+            <Route path="/events" element={<Events />} />
 
             {/* Nested routes for logged-in users */}
             <Route path="/profile" element={<Profile />} />

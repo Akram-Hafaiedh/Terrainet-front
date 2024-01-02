@@ -30,11 +30,20 @@ export default {
             transform: 'translateX(-25%)',
             animationTimingFunction: 'cubic- bezier(0, 0, 0.2, 1)'
           }
+        },
+        slide: {
+          '0%': {
+            transform: 'translateX(0)'
+          },
+          '100%': {
+            transform: 'translateX(-100%)'
+          }
         }
 
       },
       animation: {
         //   'blob': 'blob 7s infinite',
+        'slide': 'slide 20s linear infinite',
         'move-up-right': 'moveUpRight 0.5 ease-out',
         'bounce-from-left': 'bounceFromLeft 1s infinite'
       }
